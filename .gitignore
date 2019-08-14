@@ -28,8 +28,9 @@ codegen/
 octave-workspace
 
 #Input data files 
-InputData/
+InputData/*
 
 #Temp folder 
-tempFolder/
+tempFolder/*
+
 
