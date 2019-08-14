@@ -29,8 +29,11 @@ octave-workspace
 
 #Input data files 
 InputData/*
+!InputData/.gitkeep 
 
 #Temp folder 
 tempFolder/*
+!tempFolder/.gitkeep 
+
 
 
