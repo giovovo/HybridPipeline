@@ -27,8 +27,8 @@ if (analyzeNirs)
 %     %%%%%%%%%%% DAY 24-03-2018 %%%%%%%%%%%
 
       %%%%%%%%%%% DAY 25-03-2018 %%%%%%%%%%%
-      datapaths(1,1) = "/home/giovovo/Desktop/Università/Università/TesiMagi/BCI/Lab/pipelinEEG+NIRS/InputData/p11/v01/raw/NIRS/2018-03-25/2018-03-25_001";
-      datapaths(2,1) = "/home/giovovo/Desktop/Università/Università/TesiMagi/BCI/Lab/pipelinEEG+NIRS/InputData/p11/v01/raw/NIRS/2018-03-25/2018-03-25_002";
+      datapaths(1,1) = "C:\Users\Andres\Documents\MATLAB\HybridPipeline\HybridPipeline\InputData\p11\v01\raw\NIRS\2018-03-25\2018-03-25_001";
+      datapaths(2,1) = "C:\Users\Andres\Documents\MATLAB\HybridPipeline\HybridPipeline\InputData\p11\v01\raw\NIRS\2018-03-25\2018-03-25_002";
       
       %%%%%%%%%%% DAY 25-03-2018 %%%%%%%%%%%
     
@@ -51,8 +51,8 @@ if (analyzeEeg)
 
       %%%%%%%%%%% DAY 25-03-2018 %%%%%%%%%%%
       
-      datapaths(1,1) = "/home/giovovo/Desktop/Università/Università/TesiMagi/BCI/Lab/pipelinEEG+NIRS/InputData/p11/v01/d02/EEG/mat/25-Mar-2018_Block1_EEGdata.mat";
-      datapaths(2,1) = "/home/giovovo/Desktop/Università/Università/TesiMagi/BCI/Lab/pipelinEEG+NIRS/InputData/p11/v01/d02/EEG/mat/25-Mar-2018_Block2_EEGdata.mat";
+      datapaths(1,1) = "C:\Users\Andres\Documents\MATLAB\HybridPipeline\HybridPipeline\InputData\p11\v01\d02\EEG\mat\25-Mar-2018_Block1_EEGdata.mat";
+      datapaths(2,1) = "C:\Users\Andres\Documents\MATLAB\HybridPipeline\HybridPipeline\InputData\p11\v01\d02\EEG\mat\25-Mar-2018_Block2_EEGdata.mat";
       
       %%%%%%%%%%% DAY 25-03-2018 %%%%%%%%%%%
     
@@ -224,9 +224,9 @@ performFeatureReduction = true;
 finalNumberOfFeaturesNirs = 30;
 finalNumberOfFeaturesEeg = 5;
 finalNumberOfFeaturesOverall = 30;
-featureSelectionMethod ='CLISLAB_FeaturesDimensionReduction';
+% featureSelectionMethod ='CLISLAB_FeaturesDimensionReduction';
 featureSelectionMethod = 'CLISLAB_Andres_FeaturesDimensionReduction';
-featureSelectionMethod = 'GIOVANNI_featuresSelectionPengLab';
+% featureSelectionMethod = 'GIOVANNI_featuresSelectionPengLab';
 
 
 
