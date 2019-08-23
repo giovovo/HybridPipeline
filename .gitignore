@@ -35,5 +35,7 @@ InputData/*
 tempFolder/*
 !tempFolder/.gitkeep 
 
-
+#Input data files 
+PersonalFolder/*
+!tempFolder/.gitkeep 
 

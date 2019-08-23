@@ -16,7 +16,16 @@ for i = 1 : length(datapaths)
     outputEeg.baseLines = cat(3, outputEeg.baseLines, dataRecived.baseLines);
     outputEeg.thinkingPeriodes = cat(3, outputEeg.thinkingPeriodes, dataRecived.thinkingPeriodes);
     outputEeg.questionLabels =  cat(2, outputEeg.questionLabels , dataRecived.questionLabels);
-    outputEeg.channelLabels = including_channel_labels('p11','v01','d01');
+    
+    patient = ['p',char(extractBetween(datapaths(i), "Data/p", "/v"))];
+    if isequal(patient,'p')
+        patient = 'p11'
+    end
+    visit = ['v',char(extractBetween(datapaths(i), "/v", "/d"))];
+    day = ['d',char(extractBetween(datapaths(i), "/d", "/EEG/mat"))];
+    
+    
+    outputEeg.channelLabels = including_channel_labels(patient,visit,day);
 
 end
 end
