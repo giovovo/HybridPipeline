@@ -4,13 +4,24 @@ function [baselinCorrected] = CLISLAB_NIRS_Online_Preprocessing(wl_baseline, wl_
 % Modified by Giovanni start
 oxydeoxyConversion = str2func(conversion_type);
 baselineCorrection = str2func(amplitude_correction);
-filteringFunction = str2func(filteringParam.name);
+if (~isempty(filteringParam))
+    filteringFunction = str2func(filteringParam.name);
+end
 
 
 % Conversion to oxy/deoxy (messy code for consistency with previous function) 
 
 convertedData=[];
-[convertedData] = oxydeoxyConversion(wl_thinking, wl_baseline,fs);
+if isequal(conversion_type,'GIOVANNI_NIRS_LBG')
+    [convertedData] = oxydeoxyConversion(wl_thinking, wl_baseline,fs);
+end
+if isequal(conversion_type,'CLISLAB_NIRS_LBG')
+    [thinking,baseline] = oxydeoxyConversion(wl_thinking, wl_baseline,fs);
+    convertedData.baselineHbo = baseline(1:size(baseline,1)/2,:,:);
+    convertedData.baselineHbr = baseline(size(baseline,1)/2+1:end,:,:);
+    convertedData.thinkingHbo = thinking(1:size(thinking,1)/2,:,:);
+    convertedData.thinkingHbr = thinking(size(thinking,1)/2+1:end,:,:);
+end
 
 
 % Filtering
@@ -26,6 +37,9 @@ end
 baselinCorrected = filteredSignal;
 if (~isequal(amplitude_correction,'none'))
     [baselinCorrected,baselinesAverages]=  baselineCorrection(filteredSignal);
+else
+    
+    
 end
 %% Calculating Hbt
 baselinCorrected.baselineHbt = baselinCorrected.baselineHbo + baselinCorrected.baselineHbr ;
