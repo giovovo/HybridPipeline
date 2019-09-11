@@ -245,22 +245,32 @@ toc
 
 
 %% Building the model
-classifier = {'CL_MatlabSVM'};
 
-classifier = {'GIOVANNI_MatlabLDA'}; % Linear Discriminant Analysis
-classifierOptions = {'OptimizeHyperparameters','auto',...
-     'HyperparameterOptimizationOptions', struct('AcquisitionFunctionName','expected-improvement-plus')
-     };
+% %%%%%%%% SVM %%%%%%%
+% classifier = {'CL_MatlabSVM'};
+
+% %%%%%%%% Linear Discriminant Analysis %%%%%%%
+% classifier = {'GIOVANNI_MatlabLDA'}; % Linear Discriminant Analysis
+% classifierOptions = {'OptimizeHyperparameters','auto',...
+%      'HyperparameterOptimizationOptions', struct('AcquisitionFunctionName','expected-improvement-plus')
+%      };
  
- 
-classifier = {'GIOVANNI_MatlabRANDOMFOREST'};
-classifierFunction = str2func(classifier{1});
+% %%%%%%%% RandomForest %%%%%%%
+% classifier = {'GIOVANNI_MatlabRANDOMFOREST'};
+% classifierFunction = str2func(classifier{1});
+% % classifierOptions = {20,...
+% %     };
 % classifierOptions = {20,...
+%     'OOBPrediction','On',...
+%     'Surrogate','on'
 %     };
-classifierOptions = {20,...
-    'OOBPrediction','On',...
-    'Surrogate','on'
+
+%%%%%%%% GLM %%%%%%%
+classifier = {'GIOVANNI_MatlabGLM'};
+classifierOptions = {'Distribution','binomial'
     };
+classifierFunction = str2func(classifier{1});
+
 
 
 %% Nirs
