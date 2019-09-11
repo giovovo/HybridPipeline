@@ -245,45 +245,61 @@ toc
 
 
 %% Building the model
-
 classifier = {'CL_MatlabSVM'};
+classifier = {'GIOVANNI_MatlabLDA'}; % Linear Discriminant Analysis
+classifierFunction = str2func(classifier{1});
+classifierOptions = [];
+ classifierOptions = {'OptimizeHyperparameters','auto',...
+     'HyperparameterOptimizationOptions', struct('AcquisitionFunctionName','expected-improvement-plus')
+     };
 
 %% Nirs
 
-X = selectedTrainFeatures.nirs.thinking;
-Y = selectedTrainFeatures.questionLabels;
-model = fitcsvm(X,Y);
+if (analyzeNirs) 
+    % Train
+    X = selectedTrainFeatures.nirs.thinking;
+    Y = selectedTrainFeatures.questionLabels;
+    [model,modelAccuracy] = classifierFunction('classification',X,Y,classifierOptions);
+    % Test
+    X = selectedTestFeatures.nirs.thinking;
+    Y = selectedTestFeatures.questionLabels;
+    [label,predictionAccuracy] = classifierFunction('prediction',model,X);
+    testAccuracyNirs = 1-sum(abs(label-Y'))/length(Y)
+end
 
-X = selectedTestFeatures.nirs.thinking;
-Y = selectedTestFeatures.questionLabels;
-label = predict(model,X);
-testAccuracyNirs = 1-sum(abs(label-Y'))/length(Y)
 
 
 %% EEG
 
-X = selectedTrainFeatures.eeg.thinking;
-Y = selectedTrainFeatures.questionLabels;
-model = fitcsvm(X,Y);
+if (analyzeEeg)
+    % Train
+    X = selectedTrainFeatures.eeg.thinking;
+    Y = selectedTrainFeatures.questionLabels;
+    [model,modelAccuracy] = classifierFunction('classification',X,Y,classifierOptions);
+    % Test
+    X = selectedTestFeatures.eeg.thinking;
+    Y = selectedTestFeatures.questionLabels;
+    [label,predictionAccuracy] = classifierFunction('prediction',model,X);
+    testAccuracyEeg = 1-sum(abs(label-Y'))/length(Y)
+end
 
-X = selectedTestFeatures.eeg.thinking;
-Y = selectedTestFeatures.questionLabels;
-label = predict(model,X);
-testAccuracyEeg = 1-sum(abs(label-Y'))/length(Y)
+
 
 
 %% Overall
 
-X = selectedTrainFeatures.overall.thinking;
-Y = selectedTrainFeatures.questionLabels;
-model = fitcsvm(X,Y);
-
-X = selectedTestFeatures.overall.thinking;
-Y = selectedTestFeatures.questionLabels;
-label = predict(model,X);
-testAccuracyOverall = 1-sum(abs(label-Y'))/length(Y)
-
-
+if (analyzeEeg && analyzeNirs )
+    % Train
+    X = selectedTrainFeatures.overall.thinking;
+    Y = selectedTrainFeatures.questionLabels;
+    [model,modelAccuracy] = classifierFunction('classification',X,Y,classifierOptions);
+    % Test
+    X = selectedTestFeatures.overall.thinking;
+    Y = selectedTestFeatures.questionLabels;
+    [label,predictionAccuracy] = classifierFunction('prediction',model,X);
+    testAccuracyOverall = 1-sum(abs(label-Y'))/length(Y)
+    
+end
 
 
 
