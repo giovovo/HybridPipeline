@@ -246,12 +246,22 @@ toc
 
 %% Building the model
 classifier = {'CL_MatlabSVM'};
+
 classifier = {'GIOVANNI_MatlabLDA'}; % Linear Discriminant Analysis
-classifierFunction = str2func(classifier{1});
-classifierOptions = [];
- classifierOptions = {'OptimizeHyperparameters','auto',...
+classifierOptions = {'OptimizeHyperparameters','auto',...
      'HyperparameterOptimizationOptions', struct('AcquisitionFunctionName','expected-improvement-plus')
      };
+ 
+ 
+classifier = {'GIOVANNI_MatlabRANDOMFOREST'};
+classifierFunction = str2func(classifier{1});
+% classifierOptions = {20,...
+%     };
+classifierOptions = {20,...
+    'OOBPrediction','On',...
+    'Surrogate','on'
+    };
+
 
 %% Nirs
 

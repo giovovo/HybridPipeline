@@ -1,7 +1,7 @@
 function [X, Y] = GIOVANNI_MatlabLDA(mode, varargin)
 % GIOVANNI_MatlabLDA Build a Linear discriminant analysis using the Matlab's function
 % fitcdiscr, or predict the labels using the function predict.
-% [MDL,ACC] = GIOVANNI_MatlabLDA('classification',FEATURES,LABELS) returns the
+% [MDL,ACC] = GIOVANNI_MatlabLDA('classification',FEATURES,LABELS,classifierOptions) returns the
 % LDA model and hardcoded '-1' as no model accuracy is provided. For extra paramters 
 % pleas refere to "help fitcdiscr" and structure the input as follows
 
