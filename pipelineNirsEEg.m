@@ -16,6 +16,8 @@ if (analyzeNirs)
     
     
     
+    
+    
     % put inside the datapaths variable all the paths to the nirs raw files
     
     %%%%%%%%%%% DAY 24-03-2018 %%%%%%%%%%%
