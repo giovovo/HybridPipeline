@@ -1,4 +1,4 @@
-function [baselinCorrected] = CLISLAB_NIRS_Online_Preprocessing(wl_baseline, wl_thinking,questionLabels, channelLabels, fs, conversion_type, amplitude_correction,filteringParam)
+function [baselinCorrected] = CLISLAB_NIRS_Online_Preprocessing(wl_baseline, wl_thinking,questionLabels, channelLabels, fs, conversion_type, amplitude_correction,filteringParam,referenceForConversion)
 
 
 % Modified by Giovanni start
@@ -13,7 +13,7 @@ end
 
 convertedData=[];
 if isequal(conversion_type,'GIOVANNI_NIRS_LBG')
-    [convertedData] = oxydeoxyConversion(wl_thinking, wl_baseline,fs);
+    [convertedData] = oxydeoxyConversion(wl_thinking, wl_baseline,fs,referenceForConversion);
 end
 if isequal(conversion_type,'CLISLAB_NIRS_LBG')
     [thinking,baseline] = oxydeoxyConversion(wl_thinking, wl_baseline,fs);
@@ -21,6 +21,19 @@ if isequal(conversion_type,'CLISLAB_NIRS_LBG')
     convertedData.baselineHbr = baseline(size(baseline,1)/2+1:end,:,:);
     convertedData.thinkingHbo = thinking(1:size(thinking,1)/2,:,:);
     convertedData.thinkingHbr = thinking(size(thinking,1)/2+1:end,:,:);
+    
+    
+    % developing 4 newHybridBci start
+    preproc_baseline.hbo = baseline(1:end/2,:,:);
+    preproc_baseline.hbr = baseline(end/2+1:end,:,:);
+    preproc_baseline.hbt = preproc_baseline.hbo+preproc_baseline.hbr;
+
+    preproc_thinking.hbo = thinking(1:end/2,:,:);
+    preproc_thinking.hbr = thinking(end/2+1:end,:,:);
+    preproc_thinking.hbt = preproc_thinking.hbo+preproc_thinking.hbr;
+    
+    
+    % developing 4 newHybridBci finish
 end
 
 
