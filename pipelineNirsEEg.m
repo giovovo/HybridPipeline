@@ -14,29 +14,18 @@ analyzeEeg = true;
 %% Load all NIRx from raw files
 if (analyzeNirs)
     
-    
-    
-    
-    
     % put inside the datapaths variable all the paths to the nirs raw files
     
     %%%%%%%%%%% DAY 24-03-2018 %%%%%%%%%%%
-%     %datapaths(1,1) ="/home/giovovo/Desktop/Università/Università/TesiMagi/BCI/Lab/pipelinEEG+NIRS/InputData/p11/v01/raw/NIRS/2018-03-24/2018-03-24_001";%Corrupted
-%     datapaths(1,1) = "/home/giovovo/Desktop/Università/Università/TesiMagi/BCI/Lab/pipelinEEG+NIRS/InputData/p11/v01/raw/NIRS/2018-03-24/2018-03-24_002";
-%     datapaths(2,1) = "/home/giovovo/Desktop/Università/Università/TesiMagi/BCI/Lab/pipelinEEG+NIRS/InputData/p11/v01/raw/NIRS/2018-03-24/2018-03-24_003";
-%     datapaths(3,1) = "/home/giovovo/Desktop/Università/Università/TesiMagi/BCI/Lab/pipelinEEG+NIRS/InputData/p11/v01/raw/NIRS/2018-03-24/2018-03-24_004";
-%     %datapaths(5,1) = "/home/giovovo/Desktop/Università/Università/TesiMagi/BCI/Lab/pipelinEEG+NIRS/InputData/p11/v01/raw/NIRS/2018-03-24/2018-03-24_005";%Corrupted
-%     %datapaths(6,1) = "/home/giovovo/Desktop/Università/Università/TesiMagi/BCI/Lab/pipelinEEG+NIRS/InputData/p11/v01/raw/NIRS/2018-03-24/2018-03-24_006";%Corrupted
-%     %datapaths(7,1) = "/home/giovovo/Desktop/Università/Università/TesiMagi/BCI/Lab/pipelinEEG+NIRS/InputData/p11/v01/raw/NIRS/2018-03-24/2018-03-24_007";%Corrupted
-%     %%%%%%%%%%% DAY 24-03-2018 %%%%%%%%%%%
+    % datapaths(1,1) ="/home/giovovo/Desktop/Università/Università/TesiMagi/BCI/Lab/pipelinEEG+NIRS/InputData/p11/v01/raw/NIRS/2018-03-24/2018-03-24_001";%Corrupted
+    % datapaths(1,1) = "/home/giovovo/Desktop/Università/Università/TesiMagi/BCI/Lab/pipelinEEG+NIRS/InputData/p11/v01/raw/NIRS/2018-03-24/2018-03-24_002";
+    % datapaths(2,1) = "/home/giovovo/Desktop/Università/Università/TesiMagi/BCI/Lab/pipelinEEG+NIRS/InputData/p11/v01/raw/NIRS/2018-03-24/2018-03-24_003";
+    % %%%%%%%%% DAY 24-03-2018 %%%%%%%%%%%
+    
+    %%%%%%%%%%% PJM_Test_Signals\10-Sep-2019\EEG %%%%%%%%%%%
+    datapaths(1,1) = "D:\UKT\PJM_Test_Signals\Raw\NIRS\2019-09-10\2019-09-10_003";
+    datapaths(1,2) = "D:\UKT\PJM_Test_Signals\Raw\NIRS\2019-09-10\2019-09-10_005";
 
-      %%%%%%%%%%% DAY 25-03-2018 %%%%%%%%%%%
-      datapaths(1,1) = "/home/giovovo/Desktop/Università/Università/TesiMagi/BCI/Lab/pipelinEEG+NIRS/InputData/p11/v01/raw/NIRS/2018-03-25/2018-03-25_001";
-      datapaths(2,1) = "/home/giovovo/Desktop/Università/Università/TesiMagi/BCI/Lab/pipelinEEG+NIRS/InputData/p11/v01/raw/NIRS/2018-03-25/2018-03-25_002";
-      
-      %%%%%%%%%%% DAY 25-03-2018 %%%%%%%%%%%
-    
-    
     inputData.inputNirs = GIOVANNI_loadNirsFromRawFiles(datapaths);
     questionLabels = inputData.inputNirs.questionLabels;
 end
@@ -47,19 +36,14 @@ if (analyzeEeg)
     
     % put inside the datapaths variable all the paths to the eeg .mat files
     
-%     %%%%%%%%%%% DAY 24-03-2018 %%%%%%%%%%%
-%     datapaths(1,1) = "/home/giovovo/Desktop/Università/Università/TesiMagi/BCI/Lab/pipelinEEG+NIRS/InputData/p11/v01/d01/EEG/mat/24-Mar-2018_Block2_EEGdata.mat";
-%     datapaths(2,1) = "/home/giovovo/Desktop/Università/Università/TesiMagi/BCI/Lab/pipelinEEG+NIRS/InputData/p11/v01/d01/EEG/mat/24-Mar-2018_Block3_EEGdata.mat";
-%     datapaths(3,1) = "/home/giovovo/Desktop/Università/Università/TesiMagi/BCI/Lab/pipelinEEG+NIRS/InputData/p11/v01/d01/EEG/mat/24-Mar-2018_Block4_EEGdata.mat";
-%     %%%%%%%%%%% DAY 24-03-2018 %%%%%%%%%%%
-
-      %%%%%%%%%%% DAY 25-03-2018 %%%%%%%%%%%
-      
-      datapaths(1,1) = "/home/giovovo/Desktop/Università/Università/TesiMagi/BCI/Lab/pipelinEEG+NIRS/InputData/p11/v01/d02/EEG/mat/25-Mar-2018_Block1_EEGdata.mat";
-      datapaths(2,1) = "/home/giovovo/Desktop/Università/Università/TesiMagi/BCI/Lab/pipelinEEG+NIRS/InputData/p11/v01/d02/EEG/mat/25-Mar-2018_Block2_EEGdata.mat";
-      
-      %%%%%%%%%%% DAY 25-03-2018 %%%%%%%%%%%
+    % %%%%%%%%%%% DAY 24-03-2018 %%%%%%%%%%%
+    % datapaths(1,1) = "/home/giovovo/Desktop/Università/Università/TesiMagi/BCI/Lab/pipelinEEG+NIRS/InputData/p11/v01/d01/EEG/mat/24-Mar-2018_Block2_EEGdata.mat";
+    % datapaths(2,1) = "/home/giovovo/Desktop/Università/Università/TesiMagi/BCI/Lab/pipelinEEG+NIRS/InputData/p11/v01/d01/EEG/mat/24-Mar-2018_Block3_EEGdata.mat";
+    % datapaths(3,1) = "/home/giovovo/Desktop/Università/Università/TesiMagi/BCI/Lab/pipelinEEG+NIRS/InputData/p11/v01/d01/EEG/mat/24-Mar-2018_Block4_EEGdata.mat";
     
+    %%%%%%%%%%% PJM_Test_Signals\10-Sep-2019\EEG %%%%%%%%%%%
+    datapaths(1,1) = "D:\UKT\PJM_Test_Signals\10-Sep-2019\EEG\mat\10-Sep-2019_Block1_EEGdata.mat";
+    datapaths(1,2) = "D:\UKT\PJM_Test_Signals\10-Sep-2019\EEG\mat\10-Sep-2019_Block2_EEGdata.mat";
     
     inputData.inputEeg = GIOVANNI_loadEegFromMatFiles(datapaths);
     questionLabels = inputData.inputEeg.questionLabels;

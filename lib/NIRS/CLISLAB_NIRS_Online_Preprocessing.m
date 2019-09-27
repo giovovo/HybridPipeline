@@ -1,4 +1,4 @@
-function [baselinCorrected] = CLISLAB_NIRS_Online_Preprocessing(wl_baseline, wl_thinking,questionLabels, channelLabels, fs, conversion_type, amplitude_correction,filteringParam)
+function [baselinCorrected] = CLISLAB_NIRS_Online_Preprocessing(wl_baseline, wl_thinking,questionLabels, channelLabels, fs, conversion_type, amplitude_correction, filteringParam)
 
 
 % Modified by Giovanni start
