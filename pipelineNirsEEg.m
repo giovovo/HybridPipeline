@@ -80,6 +80,8 @@ end
 % NIRS conversion function from wavelengths to oxy/deoxy
 
 conversion_type = 'GIOVANNI_NIRS_LBG';
+%conversion_type = 'CLISLAB_NIRS_LBG';
+referenceForConversion = 'baseline&thinking';
 %~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~%
 % Filtering (beware Nyquist !! )
 
@@ -133,7 +135,7 @@ preprocessedData = [];
 if (analyzeNirs)
    [preprocessedData.nirs] = CLISLAB_NIRS_Online_Preprocessing...
        (inputData.inputNirs.baseLines, inputData.inputNirs.thinkingPeriodes,inputData.inputNirs.questionLabels,inputData.inputNirs.ChannelLabels,....
-       inputData.inputNirs.sRate, conversion_type, amplitude_correction,filteringParameters);
+       inputData.inputNirs.sRate, conversion_type, amplitude_correction,filteringParameters,referenceForConversion);
    
  
 end
@@ -248,6 +250,9 @@ toc
 
 % %%%%%%%% SVM %%%%%%%
 % classifier = {'CL_MatlabSVM'};
+% classifierFunction = str2func(classifier{1});
+% classifierOptions = [];
+
 
 % %%%%%%%% Linear Discriminant Analysis %%%%%%%
 % classifier = {'GIOVANNI_MatlabLDA'}; % Linear Discriminant Analysis
@@ -255,21 +260,21 @@ toc
 %      'HyperparameterOptimizationOptions', struct('AcquisitionFunctionName','expected-improvement-plus')
 %      };
  
-% %%%%%%%% RandomForest %%%%%%%
-% classifier = {'GIOVANNI_MatlabRANDOMFOREST'};
-% classifierFunction = str2func(classifier{1});
-% % classifierOptions = {20,...
-% %     };
-% classifierOptions = {20,...
-%     'OOBPrediction','On',...
-%     'Surrogate','on'
-%     };
-
-%%%%%%%% GLM %%%%%%%
-classifier = {'GIOVANNI_MatlabGLM'};
-classifierOptions = {'Distribution','binomial'
-    };
+%%%%%%%% RandomForest %%%%%%%
+classifier = {'GIOVANNI_MatlabRANDOMFOREST'};
 classifierFunction = str2func(classifier{1});
+% classifierOptions = {20,...
+%     };
+classifierOptions = {20,...
+    'OOBPrediction','On',...
+    'Surrogate','on'
+    };
+
+% %%%%%%%% GLM %%%%%%%
+% classifier = {'GIOVANNI_MatlabGLM'};
+% classifierOptions = {'Distribution','binomial'
+%     };
+% classifierFunction = str2func(classifier{1});
 
 
 

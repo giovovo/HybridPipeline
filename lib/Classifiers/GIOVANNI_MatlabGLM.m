@@ -35,13 +35,13 @@ switch mode
 
 
         disp('GLM is building...');
-        h = helpdlg({'GLM is building...','Please wait...'},'Building model');
+        %h = helpdlg({'GLM is building...','Please wait...'},'Building model');
 
         % Build the LDA model
         mdl = fitglm(inputAndParameters{:});
         
         fprintf('GLM is built.');
-        close(h);
+        %close(h);
         
         X = mdl;
         Y = -1; % no model accuracy

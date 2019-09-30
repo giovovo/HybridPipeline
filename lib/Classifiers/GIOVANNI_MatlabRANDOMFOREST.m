@@ -43,13 +43,13 @@ switch mode
 
 
         disp('TreeBagg Model is building...');
-        h = helpdlg({'TreeBagg Model is building...','Please wait...'},'Building model');
+        %h = helpdlg({'TreeBagg Model is building...','Please wait...'},'Building model');
 
         % Build the LDA model
         mdl = TreeBagger(numTrees,inputAndParameters{:});
         
         fprintf('TreeBagg Model is built.');
-        close(h);
+        %close(h);
         
         X = mdl;
         Y = -1; % no model accuracy for LDA
