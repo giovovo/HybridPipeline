@@ -79,9 +79,9 @@ end
 %~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~%
 % NIRS conversion function from wavelengths to oxy/deoxy
 
-%conversion_type = 'GIOVANNI_NIRS_LBG';
-conversion_type = 'CLISLAB_NIRS_LBG';
-referenceForConversion = 'self';
+conversion_type = 'GIOVANNI_NIRS_LBG';
+%conversion_type = 'CLISLAB_NIRS_LBG';
+referenceForConversion = 'baseline&thinking';
 %~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~%
 % Filtering (beware Nyquist !! )
 
