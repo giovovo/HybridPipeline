@@ -3,8 +3,8 @@ clear all,clc
 tic
 %% Add libraries to the path
 addpath(genpath('ext'),genpath('lib'),'Utility');
-inputData=[];
-questionLabels = [];
+inputData       =   [];
+questionLabels  =   [];
 
 %% What do you want to analyze?
 analyzeNirs = true;
@@ -16,26 +16,13 @@ if (analyzeNirs)
     
     % put inside the datapaths variable all the paths to the nirs raw files
     
-    %%%%%%%%%%% DAY 24-03-2018 %%%%%%%%%%%
-%     %datapaths(1,1) ="/home/giovovo/Desktop/Università/Università/TesiMagi/BCI/Lab/pipelinEEG+NIRS/InputData/p11/v01/raw/NIRS/2018-03-24/2018-03-24_001";%Corrupted
-%     datapaths(1,1) = "/home/giovovo/Desktop/Università/Università/TesiMagi/BCI/Lab/pipelinEEG+NIRS/InputData/p11/v01/raw/NIRS/2018-03-24/2018-03-24_002";
-%     datapaths(2,1) = "/home/giovovo/Desktop/Università/Università/TesiMagi/BCI/Lab/pipelinEEG+NIRS/InputData/p11/v01/raw/NIRS/2018-03-24/2018-03-24_003";
-%     datapaths(3,1) = "/home/giovovo/Desktop/Università/Università/TesiMagi/BCI/Lab/pipelinEEG+NIRS/InputData/p11/v01/raw/NIRS/2018-03-24/2018-03-24_004";
-%     %datapaths(5,1) = "/home/giovovo/Desktop/Università/Università/TesiMagi/BCI/Lab/pipelinEEG+NIRS/InputData/p11/v01/raw/NIRS/2018-03-24/2018-03-24_005";%Corrupted
-%     %datapaths(6,1) = "/home/giovovo/Desktop/Università/Università/TesiMagi/BCI/Lab/pipelinEEG+NIRS/InputData/p11/v01/raw/NIRS/2018-03-24/2018-03-24_006";%Corrupted
-%     %datapaths(7,1) = "/home/giovovo/Desktop/Università/Università/TesiMagi/BCI/Lab/pipelinEEG+NIRS/InputData/p11/v01/raw/NIRS/2018-03-24/2018-03-24_007";%Corrupted
-%     %%%%%%%%%%% DAY 24-03-2018 %%%%%%%%%%%
-
-      %%%%%%%%%%% DAY 25-03-2018 %%%%%%%%%%%
-      datapaths(1,1) = "/home/giovovo/Desktop/Università/Università/TesiMagi/BCI/Lab/pipelinEEG+NIRS/InputData/p11/v01/raw/NIRS/2018-03-25/2018-03-25_001";
-      datapaths(2,1) = "/home/giovovo/Desktop/Università/Università/TesiMagi/BCI/Lab/pipelinEEG+NIRS/InputData/p11/v01/raw/NIRS/2018-03-25/2018-03-25_002";
-      
-      %%%%%%%%%%% DAY 25-03-2018 %%%%%%%%%%%
+      datapaths(1,1) = "D:\UKT\PJM_Test_Signals\10-Sep-2019\NIRS\mat\10-Sep-2019_Block1_NIRSdata.mat";
+      datapaths(2,1) = "D:\UKT\PJM_Test_Signals\10-Sep-2019\NIRS\mat\10-Sep-2019_Block2_NIRSdata.mat";
     
-    
-    inputData.inputNirs = GIOVANNI_loadNirsFromRawFiles(datapaths);
-    questionLabels = inputData.inputNirs.questionLabels;
+    inputData.inputNirs =   GIOVANNI_loadNirsFromRawFiles(datapaths);
+    questionLabels      =   inputData.inputNirs.questionLabels;
 end
+
 
 %% Load all EEG  from mat files
 
@@ -43,31 +30,21 @@ if (analyzeEeg)
     
     % put inside the datapaths variable all the paths to the eeg .mat files
     
-%     %%%%%%%%%%% DAY 24-03-2018 %%%%%%%%%%%
-%     datapaths(1,1) = "/home/giovovo/Desktop/Università/Università/TesiMagi/BCI/Lab/pipelinEEG+NIRS/InputData/p11/v01/d01/EEG/mat/24-Mar-2018_Block2_EEGdata.mat";
-%     datapaths(2,1) = "/home/giovovo/Desktop/Università/Università/TesiMagi/BCI/Lab/pipelinEEG+NIRS/InputData/p11/v01/d01/EEG/mat/24-Mar-2018_Block3_EEGdata.mat";
-%     datapaths(3,1) = "/home/giovovo/Desktop/Università/Università/TesiMagi/BCI/Lab/pipelinEEG+NIRS/InputData/p11/v01/d01/EEG/mat/24-Mar-2018_Block4_EEGdata.mat";
-%     %%%%%%%%%%% DAY 24-03-2018 %%%%%%%%%%%
-
-      %%%%%%%%%%% DAY 25-03-2018 %%%%%%%%%%%
-      
-      datapaths(1,1) = "/home/giovovo/Desktop/Università/Università/TesiMagi/BCI/Lab/pipelinEEG+NIRS/InputData/p11/v01/d02/EEG/mat/25-Mar-2018_Block1_EEGdata.mat";
-      datapaths(2,1) = "/home/giovovo/Desktop/Università/Università/TesiMagi/BCI/Lab/pipelinEEG+NIRS/InputData/p11/v01/d02/EEG/mat/25-Mar-2018_Block2_EEGdata.mat";
-      
-      %%%%%%%%%%% DAY 25-03-2018 %%%%%%%%%%%
-    
-    
-    inputData.inputEeg = GIOVANNI_loadEegFromMatFiles(datapaths);
-    questionLabels = inputData.inputEeg.questionLabels;
+      datapaths(1,1) = "D:\UKT\PJM_Test_Signals\10-Sep-2019\EEG\mat\10-Sep-2019_Block1_EEGdata.mat";
+      datapaths(2,1) = "D:\UKT\PJM_Test_Signals\10-Sep-2019\EEG\mat\10-Sep-2019_Block2_EEGdata.mat";
+          
+    inputData.inputEeg  =   GIOVANNI_loadEegFromMatFiles(datapaths);
+    questionLabels      =   inputData.inputEeg.questionLabels;
 end
+
 clear datapaths
+
 %% Check consistency between egg and nirs
 questionLabel = [];
 if (analyzeNirs == 1 && analyzeEeg == 1)
-    assert(isequal(~inputData.inputEeg.questionLabels,inputData.inputNirs.questionLabels))
-    inputData.inputEeg.questionLabels = ~inputData.inputEeg.questionLabels;
+    assert(isequal(inputData.inputEeg.questionLabels,inputData.inputNirs.questionLabels))
+%     inputData.inputEeg.questionLabels = ~inputData.inputEeg.questionLabels;
 end
-
 
 %%%%%%%%%%%%%%                                  %%%%%%%%%%%%%%
 %%%%%%%%%%%%%% FROM NOW ON: 1 --> YES, 0 --> NO %%%%%%%%%%%%%%
@@ -79,23 +56,23 @@ end
 %~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~%
 % NIRS conversion function from wavelengths to oxy/deoxy
 
-%conversion_type = 'GIOVANNI_NIRS_LBG';
-conversion_type = 'CLISLAB_NIRS_LBG';
-referenceForConversion = 'self';
+conversion_type         =   'GIOVANNI_NIRS_LBG';
+% conversion_type        =   'CLISLAB_NIRS_LBG';
+referenceForConversion  =   'baseline';
 %~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~%
 % Filtering (beware Nyquist !! )
 
-filteringParameters.mode = 'bandpass';
-filteringParameters.passingHertz =[.1,.3]; % Hz
-filteringParameters.stoppingHertz = [0.001,.5]; % Hz
-filteringParameters.ripplePassBand =1; % [db]
-filteringParameters.rippleStopBand = 10;%[db]
-filteringParameters.name = 'GIOVANNI_NIRS_IIR_butter_filter';
+filteringParameters.mode            =   'bandpass';
+filteringParameters.passingHertz    =   [0.01, 0.3]; % Hz
+filteringParameters.stoppingHertz   =   [0.001, 0.4]; % Hz
+filteringParameters.ripplePassBand  =   1; % [db]
+filteringParameters.rippleStopBand  =   10; %[db]
+filteringParameters.name            =   'GIOVANNI_NIRS_IIR_butter_filter';
 %~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~%
 % Amplitude correction
 
-amplitude_correction = 'GIOVANNI_NIRS_Baseline_Correction';
-amplitude_correction = 'none';
+% amplitude_correction 	=   'GIOVANNI_NIRS_Baseline_Correction';
+amplitude_correction 	=   'none';
 %~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~%
 
 
@@ -104,27 +81,27 @@ amplitude_correction = 'none';
 %~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~%     ASK ANDRES !!!
 % Preprocessing for the segmented data 
 
-filter_type         =       convertCharsToStrings('CLISLAB_EEG_IIR_butter_filter');
-interprocess        =       [];
-amplitude_correction_eeg =      convertCharsToStrings('CLISLAB_EEG_normalization');
-selectSource        =       [1 1 1];
-%frequencyBands      =       [1 1 1 1 1];
+filter_type                 =       convertCharsToStrings('CLISLAB_EEG_IIR_butter_filter');
+interprocess                =       [];
+amplitude_correction_eeg    =       convertCharsToStrings('CLISLAB_EEG_normalization');
+selectSource                =       [1 1 1];
+% frequencyBands             =       [1 1 1 1 1];
 
-frequencyBands(1).low = 0.5;  % wideband : 0.5,30  
-frequencyBands(1).high = 30;
-frequencyBands(1).used = 1;
-frequencyBands(2).low = 1;  % delta:1,4
-frequencyBands(2).high = 4;
-frequencyBands(2).used = 1;
-frequencyBands(3).low = 4; % theta : 4, 7 
-frequencyBands(3).high = 7;
-frequencyBands(3).used = 1;
-frequencyBands(4).low = 7; % alpha: 7,13
-frequencyBands(4).high = 13;
-frequencyBands(3).used = 1;
-frequencyBands(5).low = 13; % beta: 13,30
-frequencyBands(5).high = 30;
-frequencyBands(5).used = 1;
+frequencyBands(1).low   = 0.5;  % wideband : 0.5,30  
+frequencyBands(1).high  = 30;
+frequencyBands(1).used  = 1;
+frequencyBands(2).low   = 1;  % delta:1,4
+frequencyBands(2).high  = 4;
+frequencyBands(2).used  = 1;
+frequencyBands(3).low   = 4; % theta : 4, 7 
+frequencyBands(3).high  = 7;
+frequencyBands(3).used  = 1;
+frequencyBands(4).low   = 7; % alpha: 7,13
+frequencyBands(4).high  = 13;
+frequencyBands(3).used  = 1;
+frequencyBands(5).low   = 13; % beta: 13,30
+frequencyBands(5).high  = 30;
+frequencyBands(5).used  = 1;
 
 
 %~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~%
@@ -134,16 +111,16 @@ frequencyBands(5).used = 1;
 preprocessedData = [];
 if (analyzeNirs)
    [preprocessedData.nirs] = CLISLAB_NIRS_Online_Preprocessing...
-       (inputData.inputNirs.baseLines, inputData.inputNirs.thinkingPeriodes,inputData.inputNirs.questionLabels,inputData.inputNirs.ChannelLabels,....
-       inputData.inputNirs.sRate, conversion_type, amplitude_correction,filteringParameters,referenceForConversion);
+       (inputData.inputNirs.baseLines, inputData.inputNirs.thinkingPeriodes, inputData.inputNirs.questionLabels, inputData.inputNirs.ChannelLabels,....
+       inputData.inputNirs.sRate, conversion_type, amplitude_correction, filteringParameters, referenceForConversion);
    
  
 end
 
 if (analyzeEeg)
     [preprocessedData.eeg] = CLISLAB_EEG_Online_Preprocessing...
-        (inputData.inputEeg.baseLines, inputData.inputEeg.thinkingPeriodes, inputData.inputEeg.channelLabels,inputData.inputEeg.questionLabels,...
-        500,filter_type, interprocess, selectSource, frequencyBands,amplitude_correction_eeg);
+        (inputData.inputEeg.baseLines, inputData.inputEeg.thinkingPeriodes, inputData.inputEeg.channelLabels, inputData.inputEeg.questionLabels,...
+        inputData.inputEeg.sRate, filter_type, interprocess, selectSource, frequencyBands, amplitude_correction_eeg);
  
 end
 
@@ -151,15 +128,17 @@ end
 %% Parameters for NIRS feature extraction
 
 % Features functions (Select from the folder lib/NIRS/Features)
-featureList =   {'CLISLAB_NIRS_Max'      ,...
-                'CLISLAB_NIRS_Mean'     ,...
-                'CLISLAB_NIRS_MeanNew'	,...
-                'CLISLAB_NIRS_Polyfit'	,...
-                'CLISLAB_NIRS_RMS'      ,...	
-                'CLISLAB_NIRS_Skewness' ,...
-                'CLISLAB_NIRS_Kurtosis',...
-                'CLISLAB_NIRS_Variance'};
-                %'CLISLAB_NIRS_Slope'	,...
+featureList =...
+{
+'CLISLAB_NIRS_Kurtosis',...
+'CLISLAB_NIRS_Max',...
+'CLISLAB_NIRS_Mean',...
+'CLISLAB_NIRS_RMS',...	
+'CLISLAB_NIRS_Skewness',...
+'CLISLAB_NIRS_Slope',...
+'CLISLAB_NIRS_Slope_Windowed',...
+'CLISLAB_NIRS_Variance',...
+};
             
 % Signal used for feature extraction (HbO and/or HbR and/or HbT)
 HbO = 1; HbR = 1; HbT = 0;
@@ -168,28 +147,28 @@ signal = [HbO HbR HbT];
             
 
 %% Parameters for EEG feature extraction
-temp = ['eeg_Online_ExtractFeatures_'];
+
 featureListEeg =...   
 {
-'eeg_Online_ExtractFeatures_Amplitude_Absolute_Mean',...
-%'eeg_Online_ExtractFeatures_Amplitude_Area_under_Curve',...
-%'eeg_Online_ExtractFeatures_Amplitude_Envelope_Mean',...
-%'eeg_Online_ExtractFeatures_Amplitude_Kurtosis',...
-%'eeg_Online_ExtractFeatures_Amplitude_Maximum_Location',...
-%'eeg_Online_ExtractFeatures_Amplitude_Maximum_Value',...
-%'eeg_Online_ExtractFeatures_Amplitude_Minimum_Location',...
-%'eeg_Online_ExtractFeatures_Amplitude_Minimum_Value',...
-%'eeg_Online_ExtractFeatures_Amplitude_Range',...
-%'eeg_Online_ExtractFeatures_Amplitude_Standard_Deviation',...
-%'eeg_Online_ExtractFeatures_Range_Assymetrys',...
-%'eeg_Online_ExtractFeatures_Range_LowerMargin',...
-%'eeg_Online_ExtractFeatures_Range_Mean',...
-%'eeg_Online_ExtractFeatures_Range_StandardDeviation',...
-%'eeg_Online_ExtractFeatures_Range_UpperMargin',...
-%'eeg_Online_ExtractFeatures_Range_Width',...
-%'eeg_Online_ExtractFeatures_Spectral_Absolute_Power',...
-%'eeg_Online_ExtractFeatures_Spectral_Entropy',...
-%'eeg_Online_ExtractFeatures_Spectral_Mean',...
+'eeg_Online_ExtractFeatures_Amplitude_Area_under_Curve',...
+'eeg_Online_ExtractFeatures_Amplitude_Envelope_Maximum',...
+'eeg_Online_ExtractFeatures_Amplitude_Envelope_Maximum_Location',...
+'eeg_Online_ExtractFeatures_Amplitude_Envelope_Mean',...
+'eeg_Online_ExtractFeatures_Amplitude_Kurtosis',...
+'eeg_Online_ExtractFeatures_Amplitude_Maximum_Location',...
+'eeg_Online_ExtractFeatures_Amplitude_Maximum_Value',...
+'eeg_Online_ExtractFeatures_Amplitude_Mean',...
+'eeg_Online_ExtractFeatures_Amplitude_Mean_of_Absolute',...
+'eeg_Online_ExtractFeatures_Amplitude_Minimum_Location',...
+'eeg_Online_ExtractFeatures_Amplitude_Minimum_Value',...
+'eeg_Online_ExtractFeatures_Amplitude_Range',...
+'eeg_Online_ExtractFeatures_Amplitude_Standard_Deviation',...
+
+'eeg_Online_ExtractFeatures_Spectral_Absolute_Power',...
+'eeg_Online_ExtractFeatures_Spectral_Entropy',...
+'eeg_Online_ExtractFeatures_Spectral_Maximum',...
+'eeg_Online_ExtractFeatures_Spectral_Maximum_Location',...
+'eeg_Online_ExtractFeatures_Spectral_Mean',...
 };
 
 
@@ -205,7 +184,7 @@ end
 if (analyzeEeg)
     disp([newline 'Extracting EEG features...' ])
     %addpath(['lib',filesep,'EEG',filesep,'Features'])
-    [features.eeg] = GIOVANNI_EEG_Online_ExtractFeatures(preprocessedData.eeg, 500, featureListEeg);
+    [features.eeg] = GIOVANNI_EEG_Online_ExtractFeatures(preprocessedData.eeg, inputData.inputEeg.sRate, featureListEeg);
     disp([newline 'EEG features extracted!'])
 
 end

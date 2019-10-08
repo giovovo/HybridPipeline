@@ -3,9 +3,16 @@ function feature = CLISLAB_NIRS_Variance(indata)
 % feature.featuresLabels = string;
 % feature.features = trialXfeatures
 
+labels = "Variance";
+
+signal = ["HbO" "HbR" "HbT"];
+signal = signal(find(indata.source));
+feature.featuresLabels = (labels + " - " + signal)';
+
+numSignal = sum(indata.source);
+
 data = indata.od;
 
-feature.featuresLabels = "Variance";
 %    using variance values of each channel as feature
 % % Old version
 % trainfeature=[];
@@ -21,5 +28,6 @@ feature.featuresLabels = "Variance";
 
 v = var(data,0,2);
 v = squeeze(v);
-feature.featuresLabels = repmat(feature.featuresLabels,size(v,1),1);
+feature.featuresLabels = repmat(feature.featuresLabels,size(v,1)/numSignal,1);
+feature.featuresLabels = feature.featuresLabels(:);
 feature.features = v';

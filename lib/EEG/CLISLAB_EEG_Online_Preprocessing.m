@@ -1,7 +1,10 @@
+function [structOutput] = CLISLAB_EEG_Online_Preprocessing(baselineData, thinkingData, channelsLabels, questionLabels, fs, filter_type, interprocess, selectSource, frequencyBands, amplitude_correction)
+%% Converting the values from bits to voltage
+% +/- 410mV range in 24 bits resolution ADC on the Vamp
+% scaling_factor = 0.0488281
+baselineData = 0.0488281 * baselineData;
+thinkingData = 0.0488281 * thinkingData;
 
-%function [preprocessedBaselineData,preprocessedThinkingData] = CLISLAB_EEG_Online_Preprocessing...
-function [structOutput] = CLISLAB_EEG_Online_Preprocessing...
-    (baselineData, thinkingData, channelsLabels,questionLabels, fs, filter_type, interprocess, selectSource, frequencyBands,amplitude_correction)
 % changed by wu on 2019.05.14 change the funciton name (discard wu) 
 %% Creating and Applying IIR Notch Filter to the raw signal
 %Creating Notch Filter
@@ -17,13 +20,12 @@ if dimensionnumber==2
     thinkingData = (filtfilt(b.notch, a.notch, double(thinkingData')))';
     
     baselineData = (filtfilt(b.notch, a.notch, double(baselineData')))';
-elseif dimensionnumber==3
-    
-for k=1:1:size(thinkingData,3)
-    thinkingData(:,:,k) = (filtfilt(b.notch, a.notch, double(thinkingData(:,:,k)')))';
-    
-    baselineData(:,:,k) = (filtfilt(b.notch, a.notch, double(baselineData(:,:,k)')))';
-end
+elseif dimensionnumber==3  
+    for k=1:1:size(thinkingData,3)
+        thinkingData(:,:,k) = (filtfilt(b.notch, a.notch, double(thinkingData(:,:,k)')))';
+
+        baselineData(:,:,k) = (filtfilt(b.notch, a.notch, double(baselineData(:,:,k)')))';
+    end
 end
 
 all_baseline.raw = baselineData;
@@ -82,7 +84,8 @@ end
 
 %% Cropping eeg, eog and emg signals
 %corrected by wu
-wn = 50; %lenght of a segment of datapoints to remove (after filtering) at the beginning and end of the data to avoid artifacts from filtering
+wn = 2; %lenght of a segment of datapoints to remove (after filtering) at the beginning and end of the data to avoid artifacts from filtering
+
 if isempty(eeg_thinking.raw)
     eeg_thinking.wideband   =   [];
     eeg_thinking.delta      =   [];
@@ -109,6 +112,7 @@ else
     eeg_baseline.alpha      =   eeg_baseline.alpha(:, wn:end-wn, :);
     eeg_baseline.beta       =   eeg_baseline.beta(:, wn:end-wn,: );
 end
+
 % corrected by wu on 2019.05.14 from & to ||
 if isempty(eog_thinking.raw)|| isempty(eog_baseline.raw)
     eog_thinking.filtered   =   [];
@@ -321,4 +325,3 @@ for Tr=4%:size(eeg_thinking.wideband,3)
 end
 
 end
-

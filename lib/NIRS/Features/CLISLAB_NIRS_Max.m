@@ -3,8 +3,14 @@ function feature = CLISLAB_NIRS_Max(indata)
 % feature.featuresLabels = string;
 % feature.features = trialXfeatures
 
-feature.featuresLabels = "Max";
-%    using peak values of each channel as feature
+labels = "Max";
+
+signal = ["HbO" "HbR" "HbT"];
+signal = signal(find(indata.source));
+feature.featuresLabels = (labels + " - " + signal)';
+
+numSignal = sum(indata.source);
+
 data = indata.od;
 
 % % Old version
@@ -19,5 +25,6 @@ data = indata.od;
 % New version by Ale
 m = max(data,[],2);
 m = squeeze(m);
-feature.featuresLabels = repmat(feature.featuresLabels,size(m,1),1);
+feature.featuresLabels = repmat(feature.featuresLabels,size(m,1)/numSignal,1);
+feature.featuresLabels(:);
 feature.features = m';

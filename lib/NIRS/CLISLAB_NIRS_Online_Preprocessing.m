@@ -1,4 +1,4 @@
-function [baselinCorrected] = CLISLAB_NIRS_Online_Preprocessing(wl_baseline, wl_thinking,questionLabels, channelLabels, fs, conversion_type, amplitude_correction,filteringParam,referenceForConversion)
+function [baselinCorrected] = CLISLAB_NIRS_Online_Preprocessing(wl_baseline, wl_thinking, questionLabels, channelLabels, fs, conversion_type, amplitude_correction, filteringParam, referenceForConversion)
 
 
 % Modified by Giovanni start
@@ -13,7 +13,7 @@ end
 
 convertedData=[];
 if isequal(conversion_type,'GIOVANNI_NIRS_LBG')
-    [convertedData] = oxydeoxyConversion(wl_thinking, wl_baseline,fs,referenceForConversion);
+    [convertedData] = oxydeoxyConversion(wl_thinking, wl_baseline, fs, referenceForConversion);
 end
 if isequal(conversion_type,'CLISLAB_NIRS_LBG')
     [thinking,baseline] = oxydeoxyConversion(wl_thinking, wl_baseline,fs);
@@ -41,14 +41,14 @@ end
 
 filteredSignal = convertedData;
 if (~isempty(filteringParam))
-    [filteredSignal] = filteringFunction(convertedData,fs,filteringParam);%,Wp,Ws,Rp,Rs
+    [filteredSignal] = filteringFunction(convertedData, fs, filteringParam);    %,Wp,Ws,Rp,Rs
 end
 
 
 % Baseline corrections
 
 baselinCorrected = filteredSignal;
-if (~isequal(amplitude_correction,'none'))
+if (~isequal(amplitude_correction, 'none'))
     [baselinCorrected,baselinesAverages]=  baselineCorrection(filteredSignal);
 else
     

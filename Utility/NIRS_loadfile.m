@@ -8,7 +8,8 @@ fileExtension = lower(fileExtension);
 
 switch fileExtension
     case 'mat'
-        allNirs = NIRS_loadmat(fullfile(datapath, '*.mat'));
+%         allNirs = NIRS_loadmat(fullfile(datapath, '*.mat'));
+        allNirs = NIRS_loadmat(fullfile(datapath));
     case 'nirs'
         allNirs = NIRS_loadnirs(fullfile(datapath, '*.nirs'));
     case 'wl1'

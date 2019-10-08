@@ -1,4 +1,4 @@
-function [convertedData] = GIOVANNI_NIRS_LBG(wl_thinking, wl_baseline,fs,baselineReference)
+function [convertedData] = GIOVANNI_NIRS_LBG(wl_thinking, wl_baseline, fs, baselineReference)
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %                                                      %
@@ -72,8 +72,7 @@ for currentTrial = 1 : size(wl_thinking,3)
             bl_loweWL =    mean(dat(1:s1/2,1     :  s2/2));%lower Wavelength
             bl_highWL =    mean(dat(1:s1/2,s2/2+1:  end));%higher Wavelength
             
-            
-            
+                       
         case 'baseline&thinking'
             % Baseline reference will be [baseline,thinking] average
             % Thinking reference will be [baseline,thinking] average
@@ -81,9 +80,6 @@ for currentTrial = 1 : size(wl_thinking,3)
             bl_loweWL =    mean(dat(:,1:s2/2));%lower Wavelength
             bl_highWL =    mean(dat(:,s2/2+1:  end));%higher Wavelength
             
-            
-            
-            %case 'blockBaseline'
             
     end
     
@@ -107,11 +103,11 @@ for currentTrial = 1 : size(wl_thinking,3)
     A=C;
     
     %Absorption Coefficients
-    e = [2.5264 1.7986; %850nm-oxy ; 850nm-deoxy
-        1.4866 3.8437]; %760nm-oxy ; 760nm-deoxy
+    e = [2.5264     1.7986; %850nm-oxy ; 850nm-deoxy
+         1.4866     3.8437]; %760nm-oxy ; 760nm-deoxy
     
     %Differential Pathlength Factor
-    DPF = [6.38 7.25]; %Essenpreis et al 1993 - 850nm and 760nm, respectively
+    DPF = [5.86 7.25]; %Essenpreis et al 1993 - 850nm and 760nm, respectively
     %Alternative calculation: https://www.ncbi.nlm.nih.gov/pubmed/24121731
     
     %Inter-optode distance (mm)
@@ -127,9 +123,9 @@ for currentTrial = 1 : size(wl_thinking,3)
     %Compute oxy and deoxy
     for i=1:s1
         A(1,:) = B(i,:); A(2,:) = B(s1+i,:);
-        c= ( inv(e2)*A  )' ;
-        oxy(i,:)       =c(:,1)'; %in mmol/l
-        deoxy(i,:)       =c(:,2)'; %in mmol/l
+        c   = ( inv(e2)*A  )' ;
+        oxy(i,:) 	= 	c(:,1)'; %in mmol/l
+        deoxy(i,:)	=   c(:,2)'; %in mmol/l
     end
     
     oxy_baselineGiovanni(:,1:baselineLength,currentTrial) = oxy(1:baselineLength,:)';

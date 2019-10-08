@@ -1,15 +1,15 @@
 function [outputNirs] = GIOVANNI_loadNirsFromRawFiles(datapaths)
 %UNTITLED2 Summary of this function goes here
 %   Detailed explanation goes here
-fileExtension = 'NIRx';
+fileExtension = 'mat';
 
 %% Preallocation
 
-outputNirs.baseLines = [];
+outputNirs.baseLines        = [];
 outputNirs.thinkingPeriodes = [];
-outputNirs.questionLabels = [];
-outputNirs.sRate = [];
-outputNirs.ChannelLabels  =[];
+outputNirs.questionLabels   = [];
+outputNirs.sRate            = [];
+outputNirs.ChannelLabels    = [];
 
 numBlocks=0;
 %% Loading and concatenating
@@ -21,7 +21,7 @@ for i = 1:length(datapaths)
 %     end
     allNirs = NIRS_loadfile(convertStringsToChars(datapath),fileExtension);
     
-    if (size(allNirs{1, 1}.baseLines,3) == 20 && size(allNirs{1, 1}.thinkingPeriodes,3 )== 20 && size(allNirs{1, 1}.questionLabels,2) == 20)
+    if (size(allNirs{1, 1}.baseLines,3) == 30 && size(allNirs{1, 1}.thinkingPeriodes,3 )== 30 && size(allNirs{1, 1}.questionLabels,2) == 30)
         outputNirs.baseLines = cat( 3,outputNirs.baseLines,allNirs{1, 1}.baseLines);
         outputNirs.thinkingPeriodes = cat( 3, outputNirs.thinkingPeriodes, allNirs{1, 1}.thinkingPeriodes);
         outputNirs.questionLabels = cat( 2, outputNirs.questionLabels,allNirs{1, 1}.questionLabels);

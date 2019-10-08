@@ -2,8 +2,17 @@ function feature = CLISLAB_NIRS_Mean(indata)
 % indata.od = channelXtimepointsXtrials
 % feature.featuresLabels = string;
 % feature.features = trialXfeatures
+
+labels = "Mean";
+
+signal = ["HbO" "HbR" "HbT"];
+signal = signal(find(indata.source));
+feature.featuresLabels = (labels + " - " + signal)';
+
+numSignal = sum(indata.source);
+
 data = indata.od;
-feature.featuresLabels = "Mean";
+
 % % OLD VERSION
 % trainfeature=[];
 % 
@@ -16,5 +25,6 @@ feature.featuresLabels = "Mean";
 % NEW Version by Ale
 m = mean(data,2);
 m = squeeze(m);
-feature.featuresLabels = repmat(feature.featuresLabels,size(m,1),1);
+feature.featuresLabels = repmat(feature.featuresLabels,size(m,1)/numSignal,1);
+feature.featuresLabels = feature.featuresLabels(:);
 feature.features = m';

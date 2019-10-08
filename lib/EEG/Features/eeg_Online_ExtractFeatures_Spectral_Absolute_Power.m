@@ -1,12 +1,9 @@
 function [tempFeature] = eeg_Online_ExtractFeatures_Spectral_Absolute_Power(Data, fs, passbandInterval)
 
-% % Conversion factor to obtain microVolts
-% Data = 0.0488281 * Data;
-
 % Parameters for Calculating the Welch Spectral Density
 % timeLength      =   size(Data,2)/fs;
-windowLength	=   round(size(Data,2)/2); %Half the length of the time
-overlapping      =   round(size(Data,2)/4); %50% overlapping, half the length of the windows
+windowLength	=   round(size(Data,2)/2); % Half the length of the time
+overlapping     =   round(size(Data,2)/4); % 50% overlapping, half the length of the windows
 padding         =   5000;
 
 % Welch’s power spectral density estimate

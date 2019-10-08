@@ -38,6 +38,7 @@ HbT = selectSource(3);
     
     data.od = OD;
     data.fs = fs;
+    data.source = selectSource;
     
     nirsFeatures = [];
     nirsFeaturesLabels = [];
