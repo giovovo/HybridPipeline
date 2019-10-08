@@ -14,6 +14,7 @@ feature.featuresLabels = "Mean";
 % end
 
 % NEW Version by Ale
+
 m = mean(data,2);
 m = squeeze(m);
 feature.featuresLabels = repmat(feature.featuresLabels,size(m,1),1);
